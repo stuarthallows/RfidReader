@@ -1,0 +1,75 @@
+# Visual Studio-specific
+.vscode/
+*.code-workspace
+*.user
+*.suo
+*.vcxproj.user
+*.ncb
+*.log
+*.tlog
+*.obj
+*.pch
+*.pdb
+*.ipch
+*.idb
+*.opendb
+*.VC.db
+*.VC.opendb
+*.cppm
+.vs/
+
+# Build directories
+build/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# Output directories and generated files
+*.exe
+*.dll
+*.lib
+*.so
+*.a
+*.o
+*.i
+*.ii
+*.s
+*.d
+*.out
+*.id
+
+# Miscellaneous
+*.tmp
+*.temp
+*.swp
+*.DS_Store
+Thumbs.db
+
+# IDE-specific metadata
+.idea/
+*.iml
+
+# Package Manager
+.vcpkg/
+
+# Generated files
+*.generated.*
+
+# Debug and profiling files
+*.trace
+*.profdata
+*.gcno
+*.gcda
+
+# Coverage files
+*.gcov
+
+# Logs and reports
+*.log
+*.coverage
+
+# System files
+*.bak
+*.~lock.*
+*.orig
