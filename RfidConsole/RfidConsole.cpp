@@ -5,10 +5,11 @@
 #include <filesystem>
 
 // https://github.com/jarro2783/cxxopts
-#include "cxxopts.hpp" // import from include directory?
+#include "cxxopts.hpp" // TODO import from include directory?
 
 using namespace std;
 
+// TODO move to another file
 enum class TransferMode
 {
 	None,
@@ -17,6 +18,7 @@ enum class TransferMode
 	NamedPipe
 };
 
+// TODO Consider using magic_enum library to automate mapping from enum to string.
 static std::ostream& operator<<(std::ostream& os, TransferMode mode) 
 {
 	switch (mode) 
@@ -47,9 +49,11 @@ int main(int argc, const char* argv[])
 	auto appName = exePath.stem().string();
 	cxxopts::Options options(appName, "RFID command line reader");
 
+	// TODO test options, add tests
+	// TODO encapsulate parsing
 	options.add_options()
 		("h,help", "Help page.")
-		("start", "Start the reader when the application starts.")
+		("start", "Start the reader when the application starts.") // TODO supports true and false?
 		("mode", "How to transfer tags to another application.", cxxopts::value<TransferMode>()->default_value("Clipboard"))
 		("format", "How to format tags when transferred", cxxopts::value<std::string>())
 		("power", "Reader power in dBm clamped between 21 and 30", cxxopts::value<int>()->default_value("24"))
@@ -63,14 +67,14 @@ int main(int argc, const char* argv[])
 
 		if (result.count("help"))
 		{
-			std::cout << options.help(/* group-name */) << std::endl;
+			std::cout << options.help() << std::endl;
 			return 0;
-			// exit(0);
 		}
 
 		if (result.count("start"))
 		{
-			std::cout << "Reader will start with application\n";
+			auto start{ result["start"].as<bool>() };
+			std::cout << "Reader will start with application: " << start << "\n";
 		}
 		if (result.count("mode"))
 		{
@@ -97,9 +101,6 @@ int main(int argc, const char* argv[])
 		{
 			std::cout << "Probe duration: \n";
 		}
-
-		// To access a user-provided positional argument.
-		// std::string inputFile{ result["input"].as<std::string>() };
 	}
 	catch (const std::exception& e)
 	{
